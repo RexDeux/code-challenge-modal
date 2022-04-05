@@ -10,7 +10,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <div class="row">
     <%= yield %>
-  </body>
+    <%= turbo_frame_tag "remote_modal", target: "_top" %>
+  </div>
 </html>
