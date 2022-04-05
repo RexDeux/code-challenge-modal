@@ -1,16 +1,20 @@
 class InvitesController < ApplicationController
-  def create
-    @invite = Invite.new(invite_params)
-  end
-  def update
-    @invite = Invite.find(params[:id])
-    if @invite.update_attributes(params[:invite])
-        print"Invite Sent!"
-    else
-        print"Please try again later!"
+  def new
+    @invite = Invite.new
+    @cycle = Cycle.find(params[:cycle_id])
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
+
+  def create
+    @invite = Invite.new(invite_params)
+    @invite.cycle = Cycle.find(params[:cycle_id])
+  end
+
   private
+
   def invite_params
     params.require(:invite).permit(:email,:message)
   end

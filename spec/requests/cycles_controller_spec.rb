@@ -7,6 +7,7 @@ RSpec.describe "CyclesController", :type => :request do
     it "shows a list of cycles" do
       get "/"
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include visible_cycle.name
       expect(response.body).to include cycles
     end
   end
