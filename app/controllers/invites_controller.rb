@@ -11,6 +11,13 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new(invite_params)
     @invite.cycle = Cycle.find(params[:cycle_id])
+    respond_to do |format|
+      if @invite.save
+        redirect_to root_path, notice: "Your invite has been sent!"
+      else
+        format.json { render json: @invite}
+      end
+    end
   end
 
   private

@@ -17,9 +17,10 @@
     </div>
   </div>
   <hr class="solid">
-  <div class="mb-3">
+  <div class="popup" onclick="myFunction()">
     <%= form.submit "SEND INVITATION", class: "submit" , method: :post do |form| %>
-      <%= form.button "Update" %>
+        <%= form.button "Update" %>
+        <span class="popuptext" id="myPopup"></span>
     <% end %>
   </div>
 <% end %>
