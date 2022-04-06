@@ -20,4 +20,10 @@ RSpec.describe Invite, type: :model do
     invite = Invite.new(email: "randomrandomizerandonimity")
     expect(invite).to_not be_valid
   end
+  it "should return a name from the email provided" do
+    invite = Invite.new(email: "john.cena@wwe.com")
+    invite.cycle = cycle
+    invite.save
+    expect(invite.name).to eq("John Cena")
+  end
 end
