@@ -11,12 +11,10 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new
     @invite.cycle = Cycle.find(params[:cycle_id])
-    respond_to do |format|
-      if @invite.save
-        redirect_to cycles_path, :flash => { :message => "Invite sent!" }
-      else
-        redirect_to cycles_path, :flash => { :error => "Failed to send invite!" }
-      end
+    if @invite.save
+      redirect_to cycles_path
+    else
+      redirect_to cycles_path
     end
   end
 
