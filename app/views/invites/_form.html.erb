@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" id="modal_content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="newItemRemoteModalLabel"><%= title %></h4>
+                    <h4 class="modal-title" id="newItemRemoteModalLabel"></h4>
                     <div>
                       <%= form_for :post, mode:@invite, url: cycle_invites_path do |form| %>
                       <%= form.email_field :message , class: "form-control" , placeholder: "Email Addresses...*", class: 'form'%>
