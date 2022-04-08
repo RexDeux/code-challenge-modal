@@ -13,9 +13,9 @@ class InvitesController < ApplicationController
     @invite.cycle = Cycle.find(params[:cycle_id])
     respond_to do |format|
       if @invite.save
-        redirect_to root_path, notice: "Your invite has been sent!"
+        redirect_to cycles_path
       else
-        format.json { render json: @invite}
+        redirect_to cycles_path
       end
     end
   end
@@ -23,6 +23,6 @@ class InvitesController < ApplicationController
   private
 
   def invite_params
-    params.require(:invite).permit(:email, :message)
+    params.permit(:email, :cycle_id, :message)
   end
 end

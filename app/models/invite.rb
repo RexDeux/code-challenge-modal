@@ -16,7 +16,9 @@ class Invite < ApplicationRecord
   end
 
   def client_name(email)
+    #Regex to separate from the email provider
     re = /'?(\w+(?:\s+\w+)*)'?\s+<?(\S+@[\w.-]+\.[a-zA-Z]{2,4}\b)/
+    #REGEX to separate the dot and give back first and last name
     re1 = /([^.]+)/
     client_name = email.scan(re) do |name|
       name.gsub!(re1)
