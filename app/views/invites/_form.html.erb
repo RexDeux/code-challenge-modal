@@ -1,27 +1,38 @@
-
-  <%=  form_for :post, mode:@invite, url: cycle_invites_path do |form| %>
-
-  <hr class="solid">
-  <div class="form2">
-    <%= form.label :"Want to include a message with the invite?" , style: "display: block", class: "form-label" %>
-    <%= form.text_area :"Please enter your message", placeholder: "Please enter your message", class: 'form2'%>
-    <div style="color: red">
+<%= turbo_frame_tag "remote_modal" do %>
+ <div class="modal fade" id="shareRecipeModal" tabindex="-1" aria-labelledby="newItemRemoteModalLabel" aria-hidden="true" data-controller="remote-modal" data-action="turbo:before-render@document->remote-modal#hideBeforeRender">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" id="modal_content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="newItemRemoteModalLabel"></h4>
+                    <div>
+                      <%= form_for :post, mode:@invite, url: cycle_invites_path do |form| %>
+                      <%= form.email_field :message , class: "form-control" , placeholder: "Email Addresses...*", class: 'form'%>
+                      <hr class="solid">
+                      <div class="form2">
+                        <%= form.label :"Want to include a message with the invite?" , style: "display: block", class: "form-label" %>
+                        <%= form.text_area :"Please enter your message", class: "form-control" , placeholder: "Please enter your message", class: 'form2'%>
+                      </div>
+                      <hr class="solid">
+                      <div class="modal-body remote_modal_body" id="remote_modal_body">
+                        <div class="form-label2">
+                        <h5>You're about to share with the individuals above:</h5>
+                        <ul>
+                        <li>Core Structure Assembly</li>
+                        </ul>
+                        </div>
+                      </div>
+                      <hr class="solid">
+                      <div class="popup" onclick="myFunction()">
+                        <%= form.submit "SEND INVITATION", class: "submit" , method: :post do |form| %>
+                        <% end %>
+                      </div>
+                    </div>
+                    <% end %>
+                </div>
+                <div class="modal-body remote_modal_body" id="remote_modal_body">
+                    <%= yield %>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <hr class="solid">
-  <div class="modal-body remote_modal_body" id="remote_modal_body">
-    <div class="form-label2">
-    <h5>You're about to share with the individuals above:</h5>
-    <ul>
-    <li>Core Structure Assembly</li>
-    </ul>
-    </div>
-  </div>
-  <hr class="solid">
-  <div class="popup" onclick="myFunction()">
-    <%= form.submit "SEND INVITATION", class: "submit" , method: :post do |form| %>
-        <%= form.button "Update" %>
-        <span class="popuptext" id="myPopup"></span>
-    <% end %>
-  </div>
-  <% end %>
+<% end %>
