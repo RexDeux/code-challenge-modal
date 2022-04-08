@@ -16,16 +16,14 @@ class Invite < ApplicationRecord
   end
 
   def client_name(email)
-    #Regex to separate from the email provider
-    re = /'?(\w+(?:\s+\w+)*)'?\s+<?(\S+@[\w.-]+\.[a-zA-Z]{2,4}\b)/
-    #REGEX to separate the dot and give back first and last name
-    re1 = /([^.]+)/
-    client_name = email.scan(re) do |name|
-      name.gsub!(re1)
+    re = /'?(\w+(?:\s+\w+)*)'?\s+<?(\S+@[\w.-]+\.[a-zA-Z]{2,4}\b)/ #Regex to validate email
+    re1 = /([^.]+)/  #REGEX to separate the dot and give back first and last name
+    client_name = email.scan(re) do |name| #go through the name with the first REGEX and scan which returns the match
+      name.gsub!(re1) #And with gsub! it returns the original instance with all ocurrences of the second pattern
     end
-    client_name = client_name.split('.')
-    self_name = client_name.join(' ')
-    return self_name.titleize
+    client_name = client_name.split('.') #split the string into an array of substrings with the specified pattern
+    self_name = client_name.join(' ') #join the string
+    return self_name.titleize #return the string titleized, first letter in capitals
   end
 
   #def bounced
