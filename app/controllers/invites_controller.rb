@@ -17,6 +17,7 @@ class InvitesController < ApplicationController
         format.html { redirect_to root_path, flash: {notice: "Invite successfully sent!" }}
       else
         format.html { redirect_to root_path, flash: {alert: "Invite failed!" }}
+        format.js { render :action => 'new' }
       end
     end
   end
