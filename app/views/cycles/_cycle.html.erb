@@ -1,3 +1,3 @@
 <div class="cycles-table__row">
-  <%= cycle.name %>
+  <%= link_to cycle.name, new_cycle_invite_path(cycle), class: "btn btn-primary", data: { turbo_frame: "remote_modal" }%>
 </div>
