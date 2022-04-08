@@ -4,18 +4,19 @@ class InvitesController < ApplicationController
     @cycle = Cycle.find(params[:cycle_id])
     respond_to do |format|
       format.html
-      format.json
+      format.js
     end
   end
 
   def create
-    @invite = Invite.new(invite_params)
+    @invite = Invite.new
     @invite.cycle = Cycle.find(params[:cycle_id])
     respond_to do |format|
+      #added notices in case the post request failed
       if @invite.save
-        redirect_to root_path, notice: "Your invite has been sent!"
+        format.html { redirect_to root_path, flash: {notice: "Invite successfully sent!" }}
       else
-        format.json { render json: @invite}
+        format.html { redirect_to root_path, flash: {alert: "Invite failed!" }}
       end
     end
   end
@@ -23,6 +24,6 @@ class InvitesController < ApplicationController
   private
 
   def invite_params
-    params.require(:invite).permit(:email,:message)
+    params.require(:invites).permit(:email, :cycle_id, :message)
   end
 end

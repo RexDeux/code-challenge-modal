@@ -9,7 +9,7 @@ class CyclesController < ApplicationController
     @cycle = Cycle.new
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @cycle }
+      format.js
     end
   end
 end

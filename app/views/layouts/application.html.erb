@@ -13,5 +13,20 @@
   <div class="row">
     <%= yield %>
     <%= turbo_frame_tag "remote_modal", target: "_top" %>
+    <% if notice %>
+    <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
+    <style type="text/css">
+      .alert-success{
+        color: green;
+      }
+      .alert-danger{
+        color: red;
+      }
+    </style>
   </div>
 </html>
